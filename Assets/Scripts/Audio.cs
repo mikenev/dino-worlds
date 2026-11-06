@@ -1,0 +1,82 @@
+using UnityEngine;
+
+namespace DinoWorlds {
+  /// <summary>Original procedural audio: warm roost loop, playful raid drums, short stings and SFX. No licensed samples.</summary>
+  public class DwAudio : MonoBehaviour {
+    AudioSource music, sfx;
+    AudioClip homeLoop, raidLoop, winSting, loseSting, uiPop, craftSplash, peck, spit, smash;
+    string bed = "none";
+    public float musicVol = 0.35f, sfxVol = 0.55f;
+    public int playCount;
+
+    public void Init(){
+      music = gameObject.AddComponent<AudioSource>(); music.loop = true; music.playOnAwake = false; music.volume = musicVol;
+      sfx = gameObject.AddComponent<AudioSource>(); sfx.loop = false; sfx.playOnAwake = false; sfx.volume = sfxVol;
+      homeLoop = SynthLoop("home", 2.0f, HomeTone);
+      raidLoop = SynthLoop("raid", 1.6f, RaidTone);
+      winSting = SynthOneShot("win", 0.55f, WinTone);
+      loseSting = SynthOneShot("lose", 0.55f, LoseTone);
+      uiPop = SynthOneShot("ui", 0.08f, (t, _) => Mathf.Sin(2 * Mathf.PI * 880 * t) * Mathf.Exp(-t * 40f) * 0.4f);
+      craftSplash = SynthOneShot("splash", 0.2f, (t, _) => (Mathf.PerlinNoise(t * 40f, 0.2f) * 2 - 1) * Mathf.Exp(-t * 8f) * 0.5f);
+      peck = SynthOneShot("peck", 0.1f, (t, _) => Mathf.Sin(2 * Mathf.PI * 420 * t) * Mathf.Exp(-t * 28f) * 0.45f);
+      spit = SynthOneShot("spit", 0.12f, (t, _) => Mathf.Sin(2 * Mathf.PI * (520 + 200 * t) * t) * Mathf.Exp(-t * 18f) * 0.4f);
+      smash = SynthOneShot("smash", 0.18f, (t, _) => (Mathf.Sin(2 * Mathf.PI * 90 * t) + 0.4f * Mathf.Sin(2 * Mathf.PI * 45 * t)) * Mathf.Exp(-t * 10f) * 0.55f);
+      Debug.Log("[DW] audio ready clips=9 procedural");
+    }
+
+    delegate float Tone(float t, float dur);
+
+    static float HomeTone(float t, float dur){
+      float env = 0.55f + 0.45f * Mathf.Sin(2 * Mathf.PI * t / dur);
+      float f1 = 220f, f2 = 277.18f, f3 = 329.63f;
+      return (Mathf.Sin(2 * Mathf.PI * f1 * t) * 0.35f + Mathf.Sin(2 * Mathf.PI * f2 * t) * 0.25f + Mathf.Sin(2 * Mathf.PI * f3 * t) * 0.15f) * env * 0.35f;
+    }
+    static float RaidTone(float t, float dur){
+      float beat = Mathf.Pow(Mathf.Abs(Mathf.Sin(2 * Mathf.PI * t * 2.5f)), 8f);
+      float bass = Mathf.Sin(2 * Mathf.PI * 110 * t) * 0.3f;
+      float snare = (Mathf.PerlinNoise(t * 90f, 1.1f) * 2 - 1) * beat * 0.35f;
+      return (bass + snare + Mathf.Sin(2 * Mathf.PI * 330 * t) * 0.12f) * 0.4f;
+    }
+    static float WinTone(float t, float dur){
+      float[] notes = { 523.25f, 659.25f, 783.99f, 1046.5f };
+      int i = Mathf.Clamp(Mathf.FloorToInt(t / dur * notes.Length), 0, notes.Length - 1);
+      return Mathf.Sin(2 * Mathf.PI * notes[i] * t) * Mathf.Exp(-t * 2.2f) * 0.5f;
+    }
+    static float LoseTone(float t, float dur){
+      float f = Mathf.Lerp(392f, 196f, t / dur);
+      return Mathf.Sin(2 * Mathf.PI * f * t) * Mathf.Exp(-t * 2.5f) * 0.4f;
+    }
+
+    static AudioClip SynthLoop(string name, float dur, Tone tone){
+      int rate = 22050; int n = Mathf.CeilToInt(dur * rate);
+      var data = new float[n];
+      for (int i = 0; i < n; i++){ float t = i / (float)rate; data[i] = Mathf.Clamp(tone(t, dur), -1f, 1f); }
+      var c = AudioClip.Create(name, n, 1, rate, false); c.SetData(data, 0); return c;
+    }
+    static AudioClip SynthOneShot(string name, float dur, Tone tone){
+      int rate = 22050; int n = Mathf.CeilToInt(dur * rate);
+      var data = new float[n];
+      for (int i = 0; i < n; i++){ float t = i / (float)rate; data[i] = Mathf.Clamp(tone(t, dur), -1f, 1f); }
+      var c = AudioClip.Create(name, n, 1, rate, false); c.SetData(data, 0); return c;
+    }
+
+    public void SetBed(string which){
+      if (bed == which && music.isPlaying) return;
+      bed = which;
+      music.Stop();
+      if (which == "home"){ music.clip = homeLoop; music.volume = musicVol; music.Play(); }
+      else if (which == "raid"){ music.clip = raidLoop; music.volume = musicVol; music.Play(); }
+      else bed = "none";
+      Debug.Log($"[DW] audio bed={bed} playing={(music.isPlaying ? 1 : 0)}");
+    }
+    void PlaySfx(AudioClip c){ if (c == null) return; sfx.PlayOneShot(c, sfxVol); playCount++; Debug.Log($"[DW] sfx {c.name} plays={playCount}"); }
+    public void Ui(){ PlaySfx(uiPop); }
+    public void Splash(){ PlaySfx(craftSplash); }
+    public void Peck(){ PlaySfx(peck); }
+    public void Spit(){ PlaySfx(spit); }
+    public void Smash(){ PlaySfx(smash); }
+    public void Win(){ music.Stop(); bed = "none"; PlaySfx(winSting); }
+    public void Lose(){ music.Stop(); bed = "none"; PlaySfx(loseSting); }
+    public string Status(){ return $"bed={bed} music={(music != null && music.isPlaying ? 1 : 0)} plays={playCount} volM={musicVol:F2} volS={sfxVol:F2}"; }
+  }
+}

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DinoWorlds {
@@ -58,6 +59,13 @@ namespace DinoWorlds {
       b[0].mesh = Box("base", new Vector3(1.2f, 0.6f, 1.2f)); b[0].transform = Matrix4x4.Translate(new Vector3(0, 0.3f, 0));
       b[1].mesh = Box("roof", new Vector3(1.4f, 0.35f, 1.4f)); b[1].transform = Matrix4x4.Translate(new Vector3(0, 0.75f, 0));
       var m = new Mesh{ name = name }; m.CombineMeshes(b, true, true); m.RecalculateNormals(); return m;
+    }
+    public static Mesh Disc(string name, float radius, int segments){
+      var m = new Mesh{ name = name }; var v = new List<Vector3>(); var t = new List<int>();
+      v.Add(Vector3.zero);
+      for (int i = 0; i <= segments; i++){ float a = i / (float)segments * Mathf.PI * 2f; v.Add(new Vector3(Mathf.Cos(a) * radius, 0, Mathf.Sin(a) * radius)); }
+      for (int i = 1; i <= segments; i++){ t.Add(0); t.Add(i); t.Add(i + 1); }
+      m.SetVertices(v); m.SetTriangles(t, 0); m.RecalculateNormals(); m.RecalculateBounds(); return m;
     }
     public static Material Mat(Color c, bool unlit = true){
       var sh = Shader.Find(unlit ? "Universal Render Pipeline/Unlit" : "Universal Render Pipeline/Lit") ?? Shader.Find("Sprites/Default") ?? Shader.Find("Standard");

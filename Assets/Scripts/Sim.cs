@@ -17,10 +17,10 @@ namespace DinoWorlds {
     public Kind kind; public string name; public Color color; public string blurb;
     public float hp, dmg, range, speed, radius, atkCd; public int pop;
     public static readonly UnitSpec[] All = {
-      new UnitSpec{ kind = Kind.Velociraptor, name = "Velociraptor", color = new Color(0.55f, 0.92f, 0.25f), blurb = "Fast swarm · nearest target", hp = 85, dmg = 3.0f, range = 1.1f, speed = 2.35f, radius = 0.35f, atkCd = 0.7f, pop = 1 },
-      new UnitSpec{ kind = Kind.Ankylosaurus, name = "Ankylosaurus", color = new Color(0.45f, 0.52f, 0.62f), blurb = "Tank · prefers shooters", hp = 360, dmg = 4.2f, range = 1.2f, speed = 1.12f, radius = 0.55f, atkCd = 1.1f, pop = 2 },
-      new UnitSpec{ kind = Kind.Dilophosaurus, name = "Dilophosaurus", color = new Color(0.25f, 0.78f, 0.85f), blurb = "Ranged spit · prefers towers", hp = 110, dmg = 5.5f, range = 3.6f, speed = 1.7f, radius = 0.4f, atkCd = 0.85f, pop = 2 },
-      new UnitSpec{ kind = Kind.Tyrannosaurus, name = "Tyrannosaurus", color = new Color(0.92f, 0.55f, 0.2f), blurb = "Heavy smash · prefers buildings", hp = 520, dmg = 14f, range = 1.4f, speed = 0.95f, radius = 0.7f, atkCd = 1.35f, pop = 3 },
+      new UnitSpec{ kind = Kind.Velociraptor, name = "Velociraptor", color = new Color(0.55f, 0.92f, 0.25f), blurb = "Priority: nearest living defense. Fast claw swarm.", hp = 85, dmg = 3.0f, range = 1.1f, speed = 2.35f, radius = 0.35f, atkCd = 0.7f, pop = 1 },
+      new UnitSpec{ kind = Kind.Ankylosaurus, name = "Ankylosaurus", color = new Color(0.45f, 0.52f, 0.62f), blurb = "Priority: shooters first, then Heart. Tank soak.", hp = 360, dmg = 4.2f, range = 1.2f, speed = 1.12f, radius = 0.55f, atkCd = 1.1f, pop = 2 },
+      new UnitSpec{ kind = Kind.Dilophosaurus, name = "Dilophosaurus", color = new Color(0.25f, 0.78f, 0.85f), blurb = "Priority: towers/spitters. Stops short and spits.", hp = 110, dmg = 5.5f, range = 3.6f, speed = 1.7f, radius = 0.4f, atkCd = 0.85f, pop = 2 },
+      new UnitSpec{ kind = Kind.Tyrannosaurus, name = "Tyrannosaurus", color = new Color(0.92f, 0.55f, 0.2f), blurb = "Priority: Roost Heart / buildings. Heavy smash.", hp = 520, dmg = 14f, range = 1.4f, speed = 0.95f, radius = 0.7f, atkCd = 1.35f, pop = 3 },
     };
     public static UnitSpec Of(Kind k){ return All[(int)k]; }
   }
@@ -65,26 +65,46 @@ namespace DinoWorlds {
   /// <summary>Four fixed hand-designed isles. Isle 0 (Shore) keeps M1 layout and timing.</summary>
   public static class Isles {
     public static readonly IsleData[] All = {
-      // 0 Shore — M1 layout unchanged
+      // 0 Shore Isle — M1/M2 layout unchanged (hpScale ignored at runtime for isle 0)
       new IsleData{ name = "Shore Isle", band = "Shore", W = 22, H = 18, hpScale = 1f,
         Shore = new[]{ new Cell(3,0), new Cell(5,0), new Cell(7,0), new Cell(9,0), new Cell(11,0), new Cell(13,0), new Cell(15,0), new Cell(17,0), new Cell(4,1), new Cell(8,1), new Cell(12,1), new Cell(16,1) },
         Defs = new[]{ (DefKind.RoostHeart,11,15),(DefKind.PeckTower,6,8),(DefKind.PeckTower,16,8),(DefKind.PeckTower,11,11),(DefKind.FanSpitter,8,6),(DefKind.FanSpitter,14,6),(DefKind.BoulderNest,11,9),
           (DefKind.SpikeHedge,5,5),(DefKind.SpikeHedge,6,5),(DefKind.SpikeHedge,7,5),(DefKind.SpikeHedge,14,5),(DefKind.SpikeHedge,15,5),(DefKind.SpikeHedge,16,5),(DefKind.SpikeHedge,10,12),(DefKind.SpikeHedge,12,12) } },
-      // 1 Tide Cove — wider flanks, more spitters
+      // 1 Tide Cove
       new IsleData{ name = "Tide Cove", band = "Shore", W = 22, H = 18, hpScale = 1.05f,
         Shore = new[]{ new Cell(2,0), new Cell(5,0), new Cell(8,0), new Cell(11,0), new Cell(14,0), new Cell(17,0), new Cell(4,1), new Cell(10,1), new Cell(16,1) },
         Defs = new[]{ (DefKind.RoostHeart,11,16),(DefKind.PeckTower,4,7),(DefKind.PeckTower,18,7),(DefKind.PeckTower,11,10),(DefKind.FanSpitter,7,5),(DefKind.FanSpitter,15,5),(DefKind.FanSpitter,11,8),(DefKind.BoulderNest,8,12),(DefKind.BoulderNest,14,12),
           (DefKind.SpikeHedge,6,4),(DefKind.SpikeHedge,7,4),(DefKind.SpikeHedge,8,4),(DefKind.SpikeHedge,13,4),(DefKind.SpikeHedge,14,4),(DefKind.SpikeHedge,15,4),(DefKind.SpikeHedge,10,13),(DefKind.SpikeHedge,12,13) } },
-      // 2 Ridge Pass — choke hedges + boulder
+      // 2 Lagoon Shelf
+      new IsleData{ name = "Lagoon Shelf", band = "Shore", W = 22, H = 18, hpScale = 1.08f,
+        Shore = new[]{ new Cell(3,0), new Cell(6,0), new Cell(9,0), new Cell(12,0), new Cell(15,0), new Cell(18,0), new Cell(5,1), new Cell(14,1) },
+        Defs = new[]{ (DefKind.RoostHeart,11,15),(DefKind.PeckTower,5,6),(DefKind.PeckTower,17,6),(DefKind.PeckTower,11,9),(DefKind.FanSpitter,8,5),(DefKind.FanSpitter,14,5),(DefKind.BoulderNest,7,11),(DefKind.BoulderNest,15,11),
+          (DefKind.SpikeHedge,4,4),(DefKind.SpikeHedge,5,4),(DefKind.SpikeHedge,6,4),(DefKind.SpikeHedge,15,4),(DefKind.SpikeHedge,16,4),(DefKind.SpikeHedge,17,4),(DefKind.SpikeHedge,10,12),(DefKind.SpikeHedge,12,12) } },
+      // 3 Ridge Pass
       new IsleData{ name = "Ridge Pass", band = "Ridge", W = 22, H = 18, hpScale = 1.15f,
         Shore = new[]{ new Cell(4,0), new Cell(7,0), new Cell(10,0), new Cell(13,0), new Cell(16,0), new Cell(6,1), new Cell(14,1) },
         Defs = new[]{ (DefKind.RoostHeart,11,15),(DefKind.PeckTower,5,9),(DefKind.PeckTower,17,9),(DefKind.PeckTower,11,12),(DefKind.FanSpitter,9,6),(DefKind.FanSpitter,13,6),(DefKind.BoulderNest,11,8),(DefKind.BoulderNest,6,11),(DefKind.BoulderNest,16,11),
           (DefKind.SpikeHedge,8,5),(DefKind.SpikeHedge,9,5),(DefKind.SpikeHedge,10,5),(DefKind.SpikeHedge,11,5),(DefKind.SpikeHedge,12,5),(DefKind.SpikeHedge,13,5),(DefKind.SpikeHedge,9,14),(DefKind.SpikeHedge,13,14) } },
-      // 3 Ember Spire — dense core
-      new IsleData{ name = "Ember Spire", band = "Ridge", W = 22, H = 18, hpScale = 1.25f,
+      // 4 Stone Spur
+      new IsleData{ name = "Stone Spur", band = "Ridge", W = 22, H = 18, hpScale = 1.18f,
+        Shore = new[]{ new Cell(2,0), new Cell(5,0), new Cell(8,0), new Cell(11,0), new Cell(14,0), new Cell(17,0), new Cell(3,1), new Cell(15,1) },
+        Defs = new[]{ (DefKind.RoostHeart,11,16),(DefKind.PeckTower,4,8),(DefKind.PeckTower,18,8),(DefKind.PeckTower,8,11),(DefKind.PeckTower,14,11),(DefKind.FanSpitter,11,6),(DefKind.FanSpitter,6,5),(DefKind.FanSpitter,16,5),(DefKind.BoulderNest,11,9),
+          (DefKind.SpikeHedge,7,4),(DefKind.SpikeHedge,8,4),(DefKind.SpikeHedge,9,4),(DefKind.SpikeHedge,12,4),(DefKind.SpikeHedge,13,4),(DefKind.SpikeHedge,14,4),(DefKind.SpikeHedge,10,13),(DefKind.SpikeHedge,12,13) } },
+      // 5 Wind Cut
+      new IsleData{ name = "Wind Cut", band = "Ridge", W = 22, H = 18, hpScale = 1.22f,
+        Shore = new[]{ new Cell(4,0), new Cell(7,0), new Cell(10,0), new Cell(13,0), new Cell(16,0), new Cell(9,1), new Cell(12,1) },
+        Defs = new[]{ (DefKind.RoostHeart,11,15),(DefKind.PeckTower,6,7),(DefKind.PeckTower,16,7),(DefKind.PeckTower,11,11),(DefKind.FanSpitter,8,5),(DefKind.FanSpitter,14,5),(DefKind.FanSpitter,11,8),(DefKind.BoulderNest,5,12),(DefKind.BoulderNest,17,12),(DefKind.BoulderNest,11,13),
+          (DefKind.SpikeHedge,9,4),(DefKind.SpikeHedge,10,4),(DefKind.SpikeHedge,11,4),(DefKind.SpikeHedge,12,4),(DefKind.SpikeHedge,13,4),(DefKind.SpikeHedge,8,14),(DefKind.SpikeHedge,14,14) } },
+      // 6 Ember Spire
+      new IsleData{ name = "Ember Spire", band = "Caldera", W = 22, H = 18, hpScale = 1.28f,
         Shore = new[]{ new Cell(3,0), new Cell(6,0), new Cell(9,0), new Cell(12,0), new Cell(15,0), new Cell(18,0), new Cell(5,1), new Cell(15,1) },
         Defs = new[]{ (DefKind.RoostHeart,11,16),(DefKind.PeckTower,5,8),(DefKind.PeckTower,17,8),(DefKind.PeckTower,8,11),(DefKind.PeckTower,14,11),(DefKind.FanSpitter,11,6),(DefKind.FanSpitter,6,5),(DefKind.FanSpitter,16,5),(DefKind.BoulderNest,11,10),(DefKind.BoulderNest,9,13),(DefKind.BoulderNest,13,13),
           (DefKind.SpikeHedge,7,4),(DefKind.SpikeHedge,8,4),(DefKind.SpikeHedge,9,4),(DefKind.SpikeHedge,12,4),(DefKind.SpikeHedge,13,4),(DefKind.SpikeHedge,14,4),(DefKind.SpikeHedge,10,14),(DefKind.SpikeHedge,12,14) } },
+      // 7 Ash Crown
+      new IsleData{ name = "Ash Crown", band = "Caldera", W = 22, H = 18, hpScale = 1.35f,
+        Shore = new[]{ new Cell(4,0), new Cell(7,0), new Cell(10,0), new Cell(13,0), new Cell(16,0), new Cell(6,1), new Cell(14,1) },
+        Defs = new[]{ (DefKind.RoostHeart,11,16),(DefKind.PeckTower,3,7),(DefKind.PeckTower,19,7),(DefKind.PeckTower,7,10),(DefKind.PeckTower,15,10),(DefKind.PeckTower,11,12),(DefKind.FanSpitter,9,5),(DefKind.FanSpitter,13,5),(DefKind.FanSpitter,11,8),(DefKind.BoulderNest,5,13),(DefKind.BoulderNest,17,13),(DefKind.BoulderNest,11,14),
+          (DefKind.SpikeHedge,8,4),(DefKind.SpikeHedge,9,4),(DefKind.SpikeHedge,10,4),(DefKind.SpikeHedge,11,4),(DefKind.SpikeHedge,12,4),(DefKind.SpikeHedge,13,4),(DefKind.SpikeHedge,9,15),(DefKind.SpikeHedge,13,15) } },
     };
   }
 
