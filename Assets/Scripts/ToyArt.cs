@@ -38,6 +38,27 @@ namespace DinoWorlds {
       b[2].mesh = Box("gem", new Vector3(0.6f, 0.6f, 0.6f)); b[2].transform = Matrix4x4.TRS(new Vector3(0, 1.25f, 0), Quaternion.Euler(0, 45, 0), Vector3.one);
       var m = new Mesh{ name = name }; m.CombineMeshes(b, true, true); m.RecalculateNormals(); return m;
     }
+    public static Mesh Dilopho(string name){
+      var b = new CombineInstance[3];
+      b[0].mesh = Box("body", new Vector3(0.7f, 0.5f, 1.0f)); b[0].transform = Matrix4x4.Translate(new Vector3(0, 0.35f, 0));
+      b[1].mesh = Box("crest", new Vector3(0.55f, 0.35f, 0.2f)); b[1].transform = Matrix4x4.Translate(new Vector3(0, 0.75f, 0.25f));
+      b[2].mesh = Box("head", new Vector3(0.35f, 0.3f, 0.45f)); b[2].transform = Matrix4x4.Translate(new Vector3(0, 0.55f, 0.55f));
+      var m = new Mesh{ name = name }; m.CombineMeshes(b, true, true); m.RecalculateNormals(); return m;
+    }
+    public static Mesh Rex(string name){
+      var b = new CombineInstance[4];
+      b[0].mesh = Box("body", new Vector3(1.0f, 0.85f, 1.4f)); b[0].transform = Matrix4x4.Translate(new Vector3(0, 0.6f, 0));
+      b[1].mesh = Box("head", new Vector3(0.55f, 0.5f, 0.7f)); b[1].transform = Matrix4x4.Translate(new Vector3(0, 1.0f, 0.75f));
+      b[2].mesh = Box("tail", new Vector3(0.35f, 0.3f, 1.0f)); b[2].transform = Matrix4x4.Translate(new Vector3(0, 0.5f, -0.9f));
+      b[3].mesh = Box("leg", new Vector3(0.35f, 0.55f, 0.35f)); b[3].transform = Matrix4x4.Translate(new Vector3(0.25f, 0.25f, -0.1f));
+      var m = new Mesh{ name = name }; m.CombineMeshes(b, true, true); m.RecalculateNormals(); return m;
+    }
+    public static Mesh Hut(string name){
+      var b = new CombineInstance[2];
+      b[0].mesh = Box("base", new Vector3(1.2f, 0.6f, 1.2f)); b[0].transform = Matrix4x4.Translate(new Vector3(0, 0.3f, 0));
+      b[1].mesh = Box("roof", new Vector3(1.4f, 0.35f, 1.4f)); b[1].transform = Matrix4x4.Translate(new Vector3(0, 0.75f, 0));
+      var m = new Mesh{ name = name }; m.CombineMeshes(b, true, true); m.RecalculateNormals(); return m;
+    }
     public static Material Mat(Color c, bool unlit = true){
       var sh = Shader.Find(unlit ? "Universal Render Pipeline/Unlit" : "Universal Render Pipeline/Lit") ?? Shader.Find("Sprites/Default") ?? Shader.Find("Standard");
       var m = new Material(sh); if (m.HasProperty("_BaseColor")) m.SetColor("_BaseColor", c); else m.color = c; return m;
