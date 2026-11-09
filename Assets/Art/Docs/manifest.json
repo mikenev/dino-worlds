@@ -1,0 +1,2471 @@
+{
+  "title": "Dino Worlds M4 art",
+  "version": 1,
+  "read_only_source": "/workspace/dino-worlds branch m3; Assets/Scripts/Sim.cs and Meta.cs names",
+  "coordinate_system": "Unity Y-up, +Z-facing; model pivots at (0,0,0) on ground; terrain extends below top at Y=0",
+  "import_defaults": {
+    "models": "FBX scale 1, convert file units enabled, import normals, tangents Calculate Mikktspace or none for no normal maps, mesh compression Off initially, Read/Write Off, no auto colliders, animation None, material remap DW_ToyVinyl",
+    "material": "URP Lit or built-in Standard, shared atlas base map, base color white, metallic0 smoothness0.58; no normal map needed",
+    "textures": "DW_ToyAtlas.png: 512, sRGB, mipmaps On, Clamp, Bilinear, anisotropy1; desktop/WebGL compression optional. Atlas swatches have generous gutters.",
+    "ui": "Sprite metadata included after Unity validation; nine-slice values use L,B,R,T pixels. Empty skins intentionally require runtime text. Metadata uses FullRect sprite meshes; the icon atlas has 23 named sprite rects."
+  },
+  "models": [
+    {
+      "file": "Models/DW_Velociraptor.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "enum": "Kind",
+        "name": "Velociraptor"
+      },
+      "triangles": 5980,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        0.722,
+        1.175,
+        1.602
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 5980,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Ankylosaurus.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "enum": "Kind",
+        "name": "Ankylosaurus"
+      },
+      "triangles": 4896,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        1.112,
+        0.878,
+        2.307
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 4896,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Dilophosaurus.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "enum": "Kind",
+        "name": "Dilophosaurus"
+      },
+      "triangles": 5812,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        0.82,
+        1.47,
+        1.82
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 5812,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Tyrannosaurus.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "enum": "Kind",
+        "name": "Tyrannosaurus"
+      },
+      "triangles": 4948,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        0.94,
+        1.816,
+        2.316
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 4948,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_RoostHeart.fbx",
+      "mapping": {
+        "source": "Sim.cs / Meta.cs",
+        "enum": "DefKind / BldKind",
+        "name": "RoostHeart"
+      },
+      "triangles": 1308,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        2.7,
+        2.51,
+        2.4
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 1332,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Hatchery.fbx",
+      "mapping": {
+        "source": "Meta.cs",
+        "enum": "BldKind",
+        "name": "Hatchery"
+      },
+      "triangles": 804,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        2.48,
+        1.94,
+        2.08
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 828,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Workshop.fbx",
+      "mapping": {
+        "source": "Meta.cs",
+        "enum": "BldKind",
+        "name": "Workshop"
+      },
+      "triangles": 624,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        2.42,
+        1.913,
+        2.05
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 648,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_AmberPit.fbx",
+      "mapping": {
+        "source": "Meta.cs",
+        "enum": "BldKind",
+        "name": "AmberPit"
+      },
+      "triangles": 168,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        1.6,
+        0.91,
+        1.5
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 168,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Nest.fbx",
+      "mapping": {
+        "source": "Meta.cs",
+        "enum": "BldKind",
+        "name": "Nest"
+      },
+      "triangles": 1680,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        1.28,
+        0.72,
+        1.2
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 1680,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_PeckTower.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "enum": "DefKind",
+        "name": "PeckTower"
+      },
+      "triangles": 516,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        1.25,
+        1.7,
+        1.45
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 516,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_FanSpitter.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "enum": "DefKind",
+        "name": "FanSpitter"
+      },
+      "triangles": 420,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        1.25,
+        1.44,
+        1.295
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 420,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_SpikeHedge.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "enum": "DefKind",
+        "name": "SpikeHedge"
+      },
+      "triangles": 216,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        0.94,
+        0.73,
+        0.85
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 216,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_BoulderNest.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "enum": "DefKind",
+        "name": "BoulderNest"
+      },
+      "triangles": 528,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        1.45,
+        1.15,
+        1.35
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 528,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Island_0.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "island_index": 0,
+        "name": "Shore Isle",
+        "role": "visual base; no colliders or gameplay changes",
+        "place_at_unity": [
+          11,
+          0,
+          9
+        ]
+      },
+      "triangles": 216,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        22.0,
+        0.84,
+        18.0
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 216,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Shore_0.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "island_index": 0,
+        "name": "Shore Isle",
+        "role": "shore visual overlay; valid cells remain IsleData.Shore",
+        "place_at_unity": [
+          11,
+          0.025,
+          1
+        ]
+      },
+      "triangles": 108,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        22.0,
+        0.16,
+        2.0
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 108,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Island_1.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "island_index": 1,
+        "name": "Tide Cove",
+        "role": "visual base; no colliders or gameplay changes",
+        "place_at_unity": [
+          11,
+          0,
+          9
+        ]
+      },
+      "triangles": 216,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        22.0,
+        0.84,
+        18.0
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 216,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Shore_1.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "island_index": 1,
+        "name": "Tide Cove",
+        "role": "shore visual overlay; valid cells remain IsleData.Shore",
+        "place_at_unity": [
+          11,
+          0.025,
+          1
+        ]
+      },
+      "triangles": 108,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        22.0,
+        0.16,
+        2.0
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 108,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Island_2.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "island_index": 2,
+        "name": "Lagoon Shelf",
+        "role": "visual base; no colliders or gameplay changes",
+        "place_at_unity": [
+          11,
+          0,
+          9
+        ]
+      },
+      "triangles": 216,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        22.0,
+        0.84,
+        18.0
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 216,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Shore_2.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "island_index": 2,
+        "name": "Lagoon Shelf",
+        "role": "shore visual overlay; valid cells remain IsleData.Shore",
+        "place_at_unity": [
+          11,
+          0.025,
+          1
+        ]
+      },
+      "triangles": 108,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        22.0,
+        0.16,
+        2.0
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 108,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Island_3.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "island_index": 3,
+        "name": "Ridge Pass",
+        "role": "visual base; no colliders or gameplay changes",
+        "place_at_unity": [
+          11,
+          0,
+          9
+        ]
+      },
+      "triangles": 216,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        22.0,
+        0.84,
+        18.0
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 216,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Shore_3.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "island_index": 3,
+        "name": "Ridge Pass",
+        "role": "shore visual overlay; valid cells remain IsleData.Shore",
+        "place_at_unity": [
+          11,
+          0.025,
+          1
+        ]
+      },
+      "triangles": 108,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        22.0,
+        0.16,
+        2.0
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 108,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Island_4.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "island_index": 4,
+        "name": "Stone Spur",
+        "role": "visual base; no colliders or gameplay changes",
+        "place_at_unity": [
+          11,
+          0,
+          9
+        ]
+      },
+      "triangles": 216,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        22.0,
+        0.84,
+        18.0
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 216,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Shore_4.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "island_index": 4,
+        "name": "Stone Spur",
+        "role": "shore visual overlay; valid cells remain IsleData.Shore",
+        "place_at_unity": [
+          11,
+          0.025,
+          1
+        ]
+      },
+      "triangles": 108,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        22.0,
+        0.16,
+        2.0
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 108,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Island_5.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "island_index": 5,
+        "name": "Wind Cut",
+        "role": "visual base; no colliders or gameplay changes",
+        "place_at_unity": [
+          11,
+          0,
+          9
+        ]
+      },
+      "triangles": 216,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        22.0,
+        0.84,
+        18.0
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 216,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Shore_5.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "island_index": 5,
+        "name": "Wind Cut",
+        "role": "shore visual overlay; valid cells remain IsleData.Shore",
+        "place_at_unity": [
+          11,
+          0.025,
+          1
+        ]
+      },
+      "triangles": 108,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        22.0,
+        0.16,
+        2.0
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 108,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Island_6.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "island_index": 6,
+        "name": "Ember Spire",
+        "role": "visual base; no colliders or gameplay changes",
+        "place_at_unity": [
+          11,
+          0,
+          9
+        ]
+      },
+      "triangles": 216,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        22.0,
+        0.84,
+        18.0
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 216,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Shore_6.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "island_index": 6,
+        "name": "Ember Spire",
+        "role": "shore visual overlay; valid cells remain IsleData.Shore",
+        "place_at_unity": [
+          11,
+          0.025,
+          1
+        ]
+      },
+      "triangles": 108,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        22.0,
+        0.16,
+        2.0
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 108,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Island_7.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "island_index": 7,
+        "name": "Ash Crown",
+        "role": "visual base; no colliders or gameplay changes",
+        "place_at_unity": [
+          11,
+          0,
+          9
+        ]
+      },
+      "triangles": 216,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        22.0,
+        0.84,
+        18.0
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 216,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    },
+    {
+      "file": "Models/DW_Shore_7.fbx",
+      "mapping": {
+        "source": "Sim.cs",
+        "island_index": 7,
+        "name": "Ash Crown",
+        "role": "shore visual overlay; valid cells remain IsleData.Shore",
+        "place_at_unity": [
+          11,
+          0.025,
+          1
+        ]
+      },
+      "triangles": 108,
+      "texture": "Textures/DW_ToyAtlas.png",
+      "texture_size": [
+        512,
+        512
+      ],
+      "unity_dimensions_xyz": [
+        22.0,
+        0.16,
+        2.0
+      ],
+      "pivot": "Ground centre (0,0,0), Y up, +Z forward; terrain top at Y=0 and thickness below.",
+      "units": "1 Unity unit = 1 metre = 1 Sim grid cell",
+      "scale": 1,
+      "rig": "Static mesh; no skin or clips",
+      "authored_triangles": 108,
+      "triangles_note": "Unity imported count; importer drops zero-area bevel triangles where present."
+    }
+  ],
+  "textures": [
+    {
+      "file": "Textures/DW_ToyAtlas.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "role": "Shared base-color palette for every mesh; all Kind/DefKind/BldKind and Isles.All[0..7]"
+    }
+  ],
+  "ui": [
+    {
+      "file": "UI/DW_Tray.png",
+      "mapping": {
+        "role": "UI skin, no Sim enum"
+      },
+      "pixels": [
+        512,
+        256
+      ],
+      "border_LBRT": [
+        40,
+        40,
+        40,
+        40
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite (2D/UI), Single, 100 PPU, FullRect, Bilinear, Clamp, sRGB, alpha transparency, no mipmaps, maxSize=1024, uncompressed source; WebGL compression optional after visual QA"
+    },
+    {
+      "file": "UI/DW_Card.png",
+      "mapping": {
+        "role": "UI skin, no Sim enum"
+      },
+      "pixels": [
+        256,
+        320
+      ],
+      "border_LBRT": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite (2D/UI), Single, 100 PPU, FullRect, Bilinear, Clamp, sRGB, alpha transparency, no mipmaps, maxSize=1024, uncompressed source; WebGL compression optional after visual QA"
+    },
+    {
+      "file": "UI/DW_Card_Selected.png",
+      "mapping": {
+        "role": "UI skin, no Sim enum"
+      },
+      "pixels": [
+        256,
+        320
+      ],
+      "border_LBRT": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite (2D/UI), Single, 100 PPU, FullRect, Bilinear, Clamp, sRGB, alpha transparency, no mipmaps, maxSize=1024, uncompressed source; WebGL compression optional after visual QA"
+    },
+    {
+      "file": "UI/DW_Card_Disabled.png",
+      "mapping": {
+        "role": "UI skin, no Sim enum"
+      },
+      "pixels": [
+        256,
+        320
+      ],
+      "border_LBRT": [
+        24,
+        24,
+        24,
+        24
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite (2D/UI), Single, 100 PPU, FullRect, Bilinear, Clamp, sRGB, alpha transparency, no mipmaps, maxSize=1024, uncompressed source; WebGL compression optional after visual QA"
+    },
+    {
+      "file": "UI/DW_Button_Primary.png",
+      "mapping": {
+        "role": "UI skin, no Sim enum"
+      },
+      "pixels": [
+        256,
+        96
+      ],
+      "border_LBRT": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite (2D/UI), Single, 100 PPU, FullRect, Bilinear, Clamp, sRGB, alpha transparency, no mipmaps, maxSize=1024, uncompressed source; WebGL compression optional after visual QA"
+    },
+    {
+      "file": "UI/DW_Button_Pressed.png",
+      "mapping": {
+        "role": "UI skin, no Sim enum"
+      },
+      "pixels": [
+        256,
+        96
+      ],
+      "border_LBRT": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite (2D/UI), Single, 100 PPU, FullRect, Bilinear, Clamp, sRGB, alpha transparency, no mipmaps, maxSize=1024, uncompressed source; WebGL compression optional after visual QA"
+    },
+    {
+      "file": "UI/DW_Button_Secondary.png",
+      "mapping": {
+        "role": "UI skin, no Sim enum"
+      },
+      "pixels": [
+        256,
+        96
+      ],
+      "border_LBRT": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite (2D/UI), Single, 100 PPU, FullRect, Bilinear, Clamp, sRGB, alpha transparency, no mipmaps, maxSize=1024, uncompressed source; WebGL compression optional after visual QA"
+    },
+    {
+      "file": "UI/DW_Button_Disabled.png",
+      "mapping": {
+        "role": "UI skin, no Sim enum"
+      },
+      "pixels": [
+        256,
+        96
+      ],
+      "border_LBRT": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite (2D/UI), Single, 100 PPU, FullRect, Bilinear, Clamp, sRGB, alpha transparency, no mipmaps, maxSize=1024, uncompressed source; WebGL compression optional after visual QA"
+    },
+    {
+      "file": "UI/DW_Counter.png",
+      "mapping": {
+        "role": "UI skin, no Sim enum"
+      },
+      "pixels": [
+        256,
+        80
+      ],
+      "border_LBRT": [
+        28,
+        28,
+        28,
+        28
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite (2D/UI), Single, 100 PPU, FullRect, Bilinear, Clamp, sRGB, alpha transparency, no mipmaps, maxSize=1024, uncompressed source; WebGL compression optional after visual QA"
+    },
+    {
+      "file": "UI/DW_Icon_Velociraptor.png",
+      "mapping": {
+        "source": "Sim.cs",
+        "enum": "Kind",
+        "name": "Velociraptor"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_Ankylosaurus.png",
+      "mapping": {
+        "source": "Sim.cs",
+        "enum": "Kind",
+        "name": "Ankylosaurus"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_Dilophosaurus.png",
+      "mapping": {
+        "source": "Sim.cs",
+        "enum": "Kind",
+        "name": "Dilophosaurus"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_Tyrannosaurus.png",
+      "mapping": {
+        "source": "Sim.cs",
+        "enum": "Kind",
+        "name": "Tyrannosaurus"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_RoostHeart.png",
+      "mapping": {
+        "source": "Sim.cs / Meta.cs",
+        "enum": "DefKind / BldKind",
+        "name": "RoostHeart"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_Hatchery.png",
+      "mapping": {
+        "source": "Meta.cs",
+        "enum": "BldKind",
+        "name": "Hatchery"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_Workshop.png",
+      "mapping": {
+        "source": "Meta.cs",
+        "enum": "BldKind",
+        "name": "Workshop"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_AmberPit.png",
+      "mapping": {
+        "source": "Meta.cs",
+        "enum": "BldKind",
+        "name": "AmberPit"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_Nest.png",
+      "mapping": {
+        "source": "Meta.cs",
+        "enum": "BldKind",
+        "name": "Nest"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_PeckTower.png",
+      "mapping": {
+        "source": "Sim.cs",
+        "enum": "DefKind",
+        "name": "PeckTower"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_FanSpitter.png",
+      "mapping": {
+        "source": "Sim.cs",
+        "enum": "DefKind",
+        "name": "FanSpitter"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_SpikeHedge.png",
+      "mapping": {
+        "source": "Sim.cs",
+        "enum": "DefKind",
+        "name": "SpikeHedge"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_BoulderNest.png",
+      "mapping": {
+        "source": "Sim.cs",
+        "enum": "DefKind",
+        "name": "BoulderNest"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_Amber.png",
+      "mapping": {
+        "role": "resource Amber",
+        "source": "UI; no Sim enum"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_BoneShards.png",
+      "mapping": {
+        "role": "resource BoneShards",
+        "source": "UI; no Sim enum"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_Population.png",
+      "mapping": {
+        "role": "UI control Population",
+        "source": "UI; no Sim enum"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_Range.png",
+      "mapping": {
+        "role": "UI control Range",
+        "source": "UI; no Sim enum"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_Play.png",
+      "mapping": {
+        "role": "UI control Play",
+        "source": "UI; no Sim enum"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_Back.png",
+      "mapping": {
+        "role": "UI control Back",
+        "source": "UI; no Sim enum"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_Upgrade.png",
+      "mapping": {
+        "role": "UI control Upgrade",
+        "source": "UI; no Sim enum"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_Map.png",
+      "mapping": {
+        "role": "UI control Map",
+        "source": "UI; no Sim enum"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_Pause.png",
+      "mapping": {
+        "role": "UI control Pause",
+        "source": "UI; no Sim enum"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icon_Close.png",
+      "mapping": {
+        "role": "UI control Close",
+        "source": "UI; no Sim enum"
+      },
+      "pixels": [
+        128,
+        128
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pivot": [
+        0.5,
+        0.5
+      ],
+      "unity_import": "Sprite Single, 100 PPU, FullRect, sRGB, alpha, Clamp/Bilinear, no mipmaps, maxSize128"
+    },
+    {
+      "file": "UI/DW_Icons_Atlas.png",
+      "mapping": {
+        "role": "packed icon sprites"
+      },
+      "pixels": [
+        1024,
+        512
+      ],
+      "border_LBRT": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sprites": [
+        {
+          "name": "Velociraptor",
+          "rect_unity_xywh": [
+            0,
+            384,
+            128,
+            128
+          ],
+          "mapping": {
+            "source": "Sim.cs",
+            "enum": "Kind",
+            "name": "Velociraptor"
+          }
+        },
+        {
+          "name": "Ankylosaurus",
+          "rect_unity_xywh": [
+            128,
+            384,
+            128,
+            128
+          ],
+          "mapping": {
+            "source": "Sim.cs",
+            "enum": "Kind",
+            "name": "Ankylosaurus"
+          }
+        },
+        {
+          "name": "Dilophosaurus",
+          "rect_unity_xywh": [
+            256,
+            384,
+            128,
+            128
+          ],
+          "mapping": {
+            "source": "Sim.cs",
+            "enum": "Kind",
+            "name": "Dilophosaurus"
+          }
+        },
+        {
+          "name": "Tyrannosaurus",
+          "rect_unity_xywh": [
+            384,
+            384,
+            128,
+            128
+          ],
+          "mapping": {
+            "source": "Sim.cs",
+            "enum": "Kind",
+            "name": "Tyrannosaurus"
+          }
+        },
+        {
+          "name": "RoostHeart",
+          "rect_unity_xywh": [
+            512,
+            384,
+            128,
+            128
+          ],
+          "mapping": {
+            "source": "Sim.cs / Meta.cs",
+            "enum": "DefKind / BldKind",
+            "name": "RoostHeart"
+          }
+        },
+        {
+          "name": "Hatchery",
+          "rect_unity_xywh": [
+            640,
+            384,
+            128,
+            128
+          ],
+          "mapping": {
+            "source": "Meta.cs",
+            "enum": "BldKind",
+            "name": "Hatchery"
+          }
+        },
+        {
+          "name": "Workshop",
+          "rect_unity_xywh": [
+            768,
+            384,
+            128,
+            128
+          ],
+          "mapping": {
+            "source": "Meta.cs",
+            "enum": "BldKind",
+            "name": "Workshop"
+          }
+        },
+        {
+          "name": "AmberPit",
+          "rect_unity_xywh": [
+            896,
+            384,
+            128,
+            128
+          ],
+          "mapping": {
+            "source": "Meta.cs",
+            "enum": "BldKind",
+            "name": "AmberPit"
+          }
+        },
+        {
+          "name": "Nest",
+          "rect_unity_xywh": [
+            0,
+            256,
+            128,
+            128
+          ],
+          "mapping": {
+            "source": "Meta.cs",
+            "enum": "BldKind",
+            "name": "Nest"
+          }
+        },
+        {
+          "name": "PeckTower",
+          "rect_unity_xywh": [
+            128,
+            256,
+            128,
+            128
+          ],
+          "mapping": {
+            "source": "Sim.cs",
+            "enum": "DefKind",
+            "name": "PeckTower"
+          }
+        },
+        {
+          "name": "FanSpitter",
+          "rect_unity_xywh": [
+            256,
+            256,
+            128,
+            128
+          ],
+          "mapping": {
+            "source": "Sim.cs",
+            "enum": "DefKind",
+            "name": "FanSpitter"
+          }
+        },
+        {
+          "name": "SpikeHedge",
+          "rect_unity_xywh": [
+            384,
+            256,
+            128,
+            128
+          ],
+          "mapping": {
+            "source": "Sim.cs",
+            "enum": "DefKind",
+            "name": "SpikeHedge"
+          }
+        },
+        {
+          "name": "BoulderNest",
+          "rect_unity_xywh": [
+            512,
+            256,
+            128,
+            128
+          ],
+          "mapping": {
+            "source": "Sim.cs",
+            "enum": "DefKind",
+            "name": "BoulderNest"
+          }
+        },
+        {
+          "name": "Amber",
+          "rect_unity_xywh": [
+            640,
+            256,
+            128,
+            128
+          ],
+          "mapping": {
+            "role": "resource Amber",
+            "source": "UI; no Sim enum"
+          }
+        },
+        {
+          "name": "BoneShards",
+          "rect_unity_xywh": [
+            768,
+            256,
+            128,
+            128
+          ],
+          "mapping": {
+            "role": "resource BoneShards",
+            "source": "UI; no Sim enum"
+          }
+        },
+        {
+          "name": "Population",
+          "rect_unity_xywh": [
+            896,
+            256,
+            128,
+            128
+          ],
+          "mapping": {
+            "role": "UI control Population",
+            "source": "UI; no Sim enum"
+          }
+        },
+        {
+          "name": "Range",
+          "rect_unity_xywh": [
+            0,
+            128,
+            128,
+            128
+          ],
+          "mapping": {
+            "role": "UI control Range",
+            "source": "UI; no Sim enum"
+          }
+        },
+        {
+          "name": "Play",
+          "rect_unity_xywh": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "mapping": {
+            "role": "UI control Play",
+            "source": "UI; no Sim enum"
+          }
+        },
+        {
+          "name": "Back",
+          "rect_unity_xywh": [
+            256,
+            128,
+            128,
+            128
+          ],
+          "mapping": {
+            "role": "UI control Back",
+            "source": "UI; no Sim enum"
+          }
+        },
+        {
+          "name": "Upgrade",
+          "rect_unity_xywh": [
+            384,
+            128,
+            128,
+            128
+          ],
+          "mapping": {
+            "role": "UI control Upgrade",
+            "source": "UI; no Sim enum"
+          }
+        },
+        {
+          "name": "Map",
+          "rect_unity_xywh": [
+            512,
+            128,
+            128,
+            128
+          ],
+          "mapping": {
+            "role": "UI control Map",
+            "source": "UI; no Sim enum"
+          }
+        },
+        {
+          "name": "Pause",
+          "rect_unity_xywh": [
+            640,
+            128,
+            128,
+            128
+          ],
+          "mapping": {
+            "role": "UI control Pause",
+            "source": "UI; no Sim enum"
+          }
+        },
+        {
+          "name": "Close",
+          "rect_unity_xywh": [
+            768,
+            128,
+            128,
+            128
+          ],
+          "mapping": {
+            "role": "UI control Close",
+            "source": "UI; no Sim enum"
+          }
+        }
+      ],
+      "unity_import": "Sprite Multiple; rects use bottom-left origin; no mipmaps; Bilinear/Clamp; maxSize1024; alpha transparency"
+    }
+  ],
+  "preview": "DW_M4_ContactSheet.png",
+  "caveats": [
+    "Static unrigged meshes; no skeletal animation or clips.",
+    "Decorative island and shore meshes do not encode navmesh, collider or valid deployment cells. Use existing Sim data unchanged.",
+    "All meshes are original toy interpretations, not scientific reconstructions.",
+    "UI counters/text are runtime-rendered; skin images are text-free for scaling/localization.",
+    "Same geometry shared across island recolors; do not randomize gameplay layout."
+  ],
+  "materials": [
+    {
+      "file": "Materials/DW_ToyVinyl.mat",
+      "mapping": "Shared across every mesh; exact Kind, DefKind, BldKind and Isles index mappings are on the model entries",
+      "texture": "Textures/DW_ToyAtlas.png",
+      "shader": "Standard (built-in); convert/remap to URP Lit if target uses URP",
+      "metallic": 0,
+      "smoothness": 0.58
+    }
+  ],
+  "unity_validation": {
+    "file": "Unity_Import_Report.json",
+    "version": "6000.3.26f1",
+    "pass": true,
+    "models": 29,
+    "ui_textures": 33,
+    "checks": [
+      "FBX load",
+      "imported triangle counts",
+      "world-space size",
+      "Y-up / +Z-forward anchor transforms",
+      "ground pivots / terrain surface elevation",
+      "shared material remaps",
+      "single sprite loads"
+    ],
+    "atlas_sprite_count_metadata": 23,
+    "integration_tested": false
+  },
+  "delivery_notes": "Copy .meta files together with each asset: material GUID/remap, exact sprite rectangles and slice borders are already authored. Do not copy the throwaway project or source scripts into game Assets.",
+  "supporting_files": [
+    {
+      "file": "README.md",
+      "role": "Exact mapping, file list and integration notes"
+    },
+    {
+      "file": "DW_M4_ContactSheet.png",
+      "role": "Single visual preview of all models and UI sprites/states"
+    },
+    {
+      "file": "manifest.json",
+      "role": "Machine-readable mappings, geometry and import information"
+    },
+    {
+      "file": "Unity_Import_Report.json",
+      "role": "Native Unity import/geometry check evidence"
+    }
+  ],
+  "file_inventory": [
+    {
+      "file": "DW_M4_ContactSheet.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Materials/DW_ToyVinyl.mat",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Materials/DW_ToyVinyl.mat.meta",
+      "mapping": "Unity import metadata for Materials/DW_ToyVinyl.mat"
+    },
+    {
+      "file": "Models/DW_AmberPit.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_AmberPit.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_AmberPit.fbx"
+    },
+    {
+      "file": "Models/DW_Ankylosaurus.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Ankylosaurus.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Ankylosaurus.fbx"
+    },
+    {
+      "file": "Models/DW_BoulderNest.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_BoulderNest.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_BoulderNest.fbx"
+    },
+    {
+      "file": "Models/DW_Dilophosaurus.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Dilophosaurus.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Dilophosaurus.fbx"
+    },
+    {
+      "file": "Models/DW_FanSpitter.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_FanSpitter.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_FanSpitter.fbx"
+    },
+    {
+      "file": "Models/DW_Hatchery.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Hatchery.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Hatchery.fbx"
+    },
+    {
+      "file": "Models/DW_Island_0.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Island_0.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Island_0.fbx"
+    },
+    {
+      "file": "Models/DW_Island_1.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Island_1.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Island_1.fbx"
+    },
+    {
+      "file": "Models/DW_Island_2.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Island_2.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Island_2.fbx"
+    },
+    {
+      "file": "Models/DW_Island_3.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Island_3.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Island_3.fbx"
+    },
+    {
+      "file": "Models/DW_Island_4.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Island_4.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Island_4.fbx"
+    },
+    {
+      "file": "Models/DW_Island_5.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Island_5.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Island_5.fbx"
+    },
+    {
+      "file": "Models/DW_Island_6.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Island_6.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Island_6.fbx"
+    },
+    {
+      "file": "Models/DW_Island_7.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Island_7.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Island_7.fbx"
+    },
+    {
+      "file": "Models/DW_Nest.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Nest.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Nest.fbx"
+    },
+    {
+      "file": "Models/DW_PeckTower.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_PeckTower.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_PeckTower.fbx"
+    },
+    {
+      "file": "Models/DW_RoostHeart.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_RoostHeart.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_RoostHeart.fbx"
+    },
+    {
+      "file": "Models/DW_Shore_0.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Shore_0.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Shore_0.fbx"
+    },
+    {
+      "file": "Models/DW_Shore_1.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Shore_1.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Shore_1.fbx"
+    },
+    {
+      "file": "Models/DW_Shore_2.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Shore_2.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Shore_2.fbx"
+    },
+    {
+      "file": "Models/DW_Shore_3.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Shore_3.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Shore_3.fbx"
+    },
+    {
+      "file": "Models/DW_Shore_4.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Shore_4.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Shore_4.fbx"
+    },
+    {
+      "file": "Models/DW_Shore_5.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Shore_5.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Shore_5.fbx"
+    },
+    {
+      "file": "Models/DW_Shore_6.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Shore_6.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Shore_6.fbx"
+    },
+    {
+      "file": "Models/DW_Shore_7.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Shore_7.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Shore_7.fbx"
+    },
+    {
+      "file": "Models/DW_SpikeHedge.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_SpikeHedge.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_SpikeHedge.fbx"
+    },
+    {
+      "file": "Models/DW_Tyrannosaurus.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Tyrannosaurus.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Tyrannosaurus.fbx"
+    },
+    {
+      "file": "Models/DW_Velociraptor.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Velociraptor.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Velociraptor.fbx"
+    },
+    {
+      "file": "Models/DW_Workshop.fbx",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Models/DW_Workshop.fbx.meta",
+      "mapping": "Unity import metadata for Models/DW_Workshop.fbx"
+    },
+    {
+      "file": "README.md",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Textures/DW_ToyAtlas.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "Textures/DW_ToyAtlas.png.meta",
+      "mapping": "Unity import metadata for Textures/DW_ToyAtlas.png"
+    },
+    {
+      "file": "UI/DW_Button_Disabled.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Button_Disabled.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Button_Disabled.png"
+    },
+    {
+      "file": "UI/DW_Button_Pressed.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Button_Pressed.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Button_Pressed.png"
+    },
+    {
+      "file": "UI/DW_Button_Primary.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Button_Primary.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Button_Primary.png"
+    },
+    {
+      "file": "UI/DW_Button_Secondary.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Button_Secondary.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Button_Secondary.png"
+    },
+    {
+      "file": "UI/DW_Card.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Card.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Card.png"
+    },
+    {
+      "file": "UI/DW_Card_Disabled.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Card_Disabled.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Card_Disabled.png"
+    },
+    {
+      "file": "UI/DW_Card_Selected.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Card_Selected.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Card_Selected.png"
+    },
+    {
+      "file": "UI/DW_Counter.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Counter.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Counter.png"
+    },
+    {
+      "file": "UI/DW_Icon_Amber.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_Amber.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_Amber.png"
+    },
+    {
+      "file": "UI/DW_Icon_AmberPit.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_AmberPit.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_AmberPit.png"
+    },
+    {
+      "file": "UI/DW_Icon_Ankylosaurus.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_Ankylosaurus.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_Ankylosaurus.png"
+    },
+    {
+      "file": "UI/DW_Icon_Back.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_Back.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_Back.png"
+    },
+    {
+      "file": "UI/DW_Icon_BoneShards.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_BoneShards.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_BoneShards.png"
+    },
+    {
+      "file": "UI/DW_Icon_BoulderNest.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_BoulderNest.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_BoulderNest.png"
+    },
+    {
+      "file": "UI/DW_Icon_Close.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_Close.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_Close.png"
+    },
+    {
+      "file": "UI/DW_Icon_Dilophosaurus.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_Dilophosaurus.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_Dilophosaurus.png"
+    },
+    {
+      "file": "UI/DW_Icon_FanSpitter.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_FanSpitter.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_FanSpitter.png"
+    },
+    {
+      "file": "UI/DW_Icon_Hatchery.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_Hatchery.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_Hatchery.png"
+    },
+    {
+      "file": "UI/DW_Icon_Map.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_Map.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_Map.png"
+    },
+    {
+      "file": "UI/DW_Icon_Nest.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_Nest.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_Nest.png"
+    },
+    {
+      "file": "UI/DW_Icon_Pause.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_Pause.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_Pause.png"
+    },
+    {
+      "file": "UI/DW_Icon_PeckTower.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_PeckTower.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_PeckTower.png"
+    },
+    {
+      "file": "UI/DW_Icon_Play.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_Play.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_Play.png"
+    },
+    {
+      "file": "UI/DW_Icon_Population.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_Population.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_Population.png"
+    },
+    {
+      "file": "UI/DW_Icon_Range.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_Range.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_Range.png"
+    },
+    {
+      "file": "UI/DW_Icon_RoostHeart.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_RoostHeart.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_RoostHeart.png"
+    },
+    {
+      "file": "UI/DW_Icon_SpikeHedge.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_SpikeHedge.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_SpikeHedge.png"
+    },
+    {
+      "file": "UI/DW_Icon_Tyrannosaurus.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_Tyrannosaurus.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_Tyrannosaurus.png"
+    },
+    {
+      "file": "UI/DW_Icon_Upgrade.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_Upgrade.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_Upgrade.png"
+    },
+    {
+      "file": "UI/DW_Icon_Velociraptor.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_Velociraptor.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_Velociraptor.png"
+    },
+    {
+      "file": "UI/DW_Icon_Workshop.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icon_Workshop.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icon_Workshop.png"
+    },
+    {
+      "file": "UI/DW_Icons_Atlas.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Icons_Atlas.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Icons_Atlas.png"
+    },
+    {
+      "file": "UI/DW_Tray.png",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "UI/DW_Tray.png.meta",
+      "mapping": "Unity import metadata for UI/DW_Tray.png"
+    },
+    {
+      "file": "Unity_Import_Report.json",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    },
+    {
+      "file": "manifest.json",
+      "mapping": "See the corresponding models/ui/textures/materials/supporting_files entry"
+    }
+  ]
+}

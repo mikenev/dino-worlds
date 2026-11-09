@@ -128,6 +128,9 @@ namespace DinoWorlds {
     public float time; public int seed; public int scenerySeed;
     public int nextId; public bool[] blocked;
     public float fightClock; public string lastResult = ""; public float lastCombatHit; public float maxCombatIdle;
+    /// <summary>Presentation-only hit feed for audio (byUnit, kind index). Never read by the simulation.</summary>
+    public readonly List<(bool byUnit, int kind)> hitEvents = new List<(bool byUnit, int kind)>();
+    void Hit(bool byUnit, int kind){ if (hitEvents.Count < 64) hitEvents.Add((byUnit, kind)); }
     public System.Func<Kind, float> hpMul = _ => 1f, dmgMul = _ => 1f;
 
     public Battle(int isleIndex = 0, int scenerySeed = 1){
@@ -173,7 +176,7 @@ namespace DinoWorlds {
 
     public void Retry(){
       var kept = crafts; int sc = scenerySeed; int ix = isleIndex; int pc = popCap; var hm = hpMul; var dm = dmgMul;
-      defs.Clear(); units.Clear(); crafts = kept; phase = Phase.Deploy; fightClock = 0; time = 0; lastResult = ""; nextId = 0;
+      defs.Clear(); units.Clear(); hitEvents.Clear(); crafts = kept; phase = Phase.Deploy; fightClock = 0; time = 0; lastResult = ""; nextId = 0;
       isle = Isles.All[ix]; blocked = new bool[isle.W * isle.H];
       foreach (var d in isle.Defs){
         var sp = DefSpec.Of(d.k); float hp = ix == 0 ? sp.hp : sp.hp * isle.hpScale;
@@ -232,7 +235,7 @@ namespace DinoWorlds {
           u.atkCd -= dt; if (u.atkCd <= 0){
             u.atkCd = sp.atkCd; float dmg = sp.dmg * dmgMul(u.kind);
             if (u.kind == Kind.Tyrannosaurus && (t.kind == DefKind.RoostHeart || t.kind == DefKind.SpikeHedge)) dmg *= 1.25f;
-            t.hp -= dmg; lastCombatHit = fightClock;
+            t.hp -= dmg; lastCombatHit = fightClock; Hit(true, (int)u.kind);
             if (!t.Alive){ RefreshBlocks(); foreach (var o in units){ o.path.Clear(); o.pathI = 0; if (o.targetDef == u.targetDef) o.targetDef = -1; } }
           }
         } else {
@@ -255,12 +258,12 @@ namespace DinoWorlds {
           if (d.kind == DefKind.FanSpitter && u.kind == Kind.Velociraptor) score -= 1f;
           if (score < bestScore){ bestScore = score; best = u; } }
         if (best == null) continue;
-        d.atkCd = d.Spec.cooldown; best.hp -= d.Spec.dmg; lastCombatHit = fightClock;
+        d.atkCd = d.Spec.cooldown; best.hp -= d.Spec.dmg; lastCombatHit = fightClock; Hit(false, (int)d.kind);
         if (d.Spec.splash > 0) foreach (var u in units) if (u.Alive && u != best && Vector2.Distance(u.pos, best.pos) <= d.Spec.splash){ u.hp -= d.Spec.dmg * 0.6f; lastCombatHit = fightClock; }
       }
       foreach (var d in defs) if (d.Alive && d.kind == DefKind.SpikeHedge){
         d.atkCd -= dt; if (d.atkCd > 0) continue; bool hit = false;
-        foreach (var u in units) if (u.Alive && Vector2.Distance(u.pos, d.pos) < 0.75f){ u.hp -= d.Spec.dmg; hit = true; lastCombatHit = fightClock; }
+        foreach (var u in units) if (u.Alive && Vector2.Distance(u.pos, d.pos) < 0.75f){ u.hp -= d.Spec.dmg; hit = true; lastCombatHit = fightClock; Hit(false, (int)d.kind); }
         if (hit) d.atkCd = d.Spec.cooldown;
       }
       bool heartDead = true; foreach (var d in defs) if (d.kind == DefKind.RoostHeart && d.Alive) heartDead = false;

@@ -131,7 +131,7 @@ namespace DinoWorlds {
       sb.Append(string.Join(",", unitLvl)).Append('|');
       sb.Append(ClearBits()).Append('|');
       foreach (var b in buildings) sb.Append((int)b.kind).Append(':').Append(b.cell.x).Append(':').Append(b.cell.y).Append(':').Append(b.level).Append(';');
-      PlayerPrefs.SetString(SaveKey, sb.ToString()); PlayerPrefs.Save();
+      PlayerPrefs.SetString(SaveKey, sb.ToString()); PlayerPrefs.Save(); DwPersist.Flush();
       Debug.Log($"[DW] save amber={amber} shards={shards} hatch={hatchery} clear={ClearBits()}");
     }
 
@@ -158,7 +158,7 @@ namespace DinoWorlds {
       return p;
     }
 
-    public static void ClearSave(){ PlayerPrefs.DeleteKey(SaveKey); PlayerPrefs.DeleteKey(LegacyKey); PlayerPrefs.Save(); Debug.Log("[DW] save cleared"); }
+    public static void ClearSave(){ PlayerPrefs.DeleteKey(SaveKey); PlayerPrefs.DeleteKey(LegacyKey); PlayerPrefs.Save(); DwPersist.Flush(); Debug.Log("[DW] save cleared"); }
 
     /// <summary>Typed confirm must equal RESET (case-insensitive). Invalid phrase leaves save intact.</summary>
     public static bool TryTypedReset(string phrase){
