@@ -11,7 +11,8 @@ namespace DinoWorlds {
     readonly Dictionary<int, DinoAnim> unitAnim = new Dictionary<int, DinoAnim>(); readonly Dictionary<int, float> unitCd = new Dictionary<int, float>(); float animDt;
     readonly Dictionary<int, Transform> defT = new Dictionary<int, Transform>();
     Mesh meshRaptor, meshAnky, meshDilo, meshRex, meshTower, meshHeart, meshHedge, meshBoulder, meshCraft, meshTile, meshHut, meshDisc;
-    Material matGround, matShore, matWater, matCraft, matHome, matRange, matTile, matPalm, matRock, matLocked;
+    Material matGround, matShore, matShoreRim, matWater, matCraft, matHome, matRange, matTile, matPalm, matRock, matLocked;
+    MaterialPropertyBlock shorePadBlock;
     Mesh meshPalm, meshRock;
     public float uiScale = 1f; const string KUi = "dw_opt_ui";
     GUIStyle sBtn, sTog, sPanel, sLabel; float styledAt = -1f; Vector2 uiScroll;
@@ -43,7 +44,8 @@ namespace DinoWorlds {
       meshHedge = ToyArt.Box("Hedge", new Vector3(0.9f, 0.55f, 0.9f)); meshBoulder = ToyArt.Box("Boulder", new Vector3(1.1f, 0.9f, 1.1f));
       meshCraft = ToyArt.Box("Craft", new Vector3(1.1f, 0.35f, 0.7f)); meshTile = ToyArt.Box("Tile", new Vector3(0.95f, 0.08f, 0.95f));
       meshDisc = ToyArt.Disc("RangeDisc", 1f, 28);
-      matGround = ToyArt.Mat(new Color(0.45f, 0.78f, 0.4f)); matShore = ToyArt.Mat(new Color(0.93f, 0.86f, 0.55f));
+      matGround = ToyArt.Mat(new Color(0.45f, 0.78f, 0.4f)); matShore = ToyArt.Mat(new Color(0.86f, 0.62f, 0.28f));
+      matShoreRim = ToyArt.Mat(new Color(0.38f, 0.24f, 0.12f));
       matWater = ToyArt.Mat(new Color(0.35f, 0.7f, 0.95f)); matCraft = ToyArt.Mat(new Color(0.95f, 0.55f, 0.2f));
       matHome = ToyArt.Mat(new Color(0.5f, 0.82f, 0.48f));
       matRange = ToyArt.Mat(new Color(1f, 0.85f, 0.2f, 0.28f));
@@ -168,7 +170,17 @@ namespace DinoWorlds {
       Debug.Log($"[DW] scenery variant={variant} cosmeticOnly=1 isle={selectedIsle}");
     }
     void DrawShore(){ ClearKids(shoreRoot);
-      foreach (var s in battle.isle.Shore) Prop("DW_Tile_Sand", "Shore", shoreRoot, new Vector3(s.x + 0.5f, 0.02f, s.y + 0.5f), meshTile, matShore, new Vector3(s.x + 0.5f, 0.06f, s.y + 0.5f));
+      // Dark rim + warmer gold tint so sand placement pads read against the pale beach (luminance contrast, colorblind-safe).
+      foreach (var s in battle.isle.Shore){
+        var rim = Part("ShoreRim", shoreRoot, meshTile, matShoreRim, new Vector3(s.x + 0.5f, 0.03f, s.y + 0.5f));
+        rim.localScale = new Vector3(1.16f, 0.65f, 1.16f);
+        var t = Prop("DW_Tile_Sand", "Shore", shoreRoot, new Vector3(s.x + 0.5f, 0.04f, s.y + 0.5f), meshTile, matShore, new Vector3(s.x + 0.5f, 0.07f, s.y + 0.5f));
+        TintShorePad(t);
+      }
+    }
+    void TintShorePad(Transform t){
+      if (shorePadBlock == null){ shorePadBlock = new MaterialPropertyBlock(); var c = new Color(0.90f, 0.64f, 0.24f); shorePadBlock.SetColor("_BaseColor", c); shorePadBlock.SetColor("_Color", c); }
+      foreach (var r in t.GetComponentsInChildren<Renderer>()) r.SetPropertyBlock(shorePadBlock);
     }
     void DrawRangeDiscs(){
       ClearKids(rangeRoot); if (!showRanges || battle == null) return;
