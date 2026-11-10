@@ -36,7 +36,7 @@ namespace DinoWorlds {
       if (prefab != null){
         var go = Object.Instantiate(prefab, parent, false); go.name = objName; go.transform.position = pos;
         var mat = Vinyl();
-        foreach (var r in go.GetComponentsInChildren<MeshRenderer>()){
+        foreach (var r in go.GetComponentsInChildren<Renderer>()){ // MeshRenderer + SkinnedMeshRenderer (M5 rigged dinos)
           if (mat != null && (r.sharedMaterial == null || r.sharedMaterial.shader == null || !r.sharedMaterial.shader.name.StartsWith("Universal Render Pipeline"))) r.sharedMaterial = mat;
           r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; r.receiveShadows = false;
         }

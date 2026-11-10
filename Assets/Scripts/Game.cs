@@ -8,6 +8,7 @@ namespace DinoWorlds {
     public Mode mode = Mode.Home; public int sceneryVariant = 1; public int selectedIsle;
     Transform world, sceneryRoot, unitRoot, defRoot, craftRoot, shoreRoot, homeRoot, rangeRoot;
     readonly Dictionary<int, Transform> unitT = new Dictionary<int, Transform>();
+    readonly Dictionary<int, DinoAnim> unitAnim = new Dictionary<int, DinoAnim>(); readonly Dictionary<int, float> unitCd = new Dictionary<int, float>(); float animDt;
     readonly Dictionary<int, Transform> defT = new Dictionary<int, Transform>();
     Mesh meshRaptor, meshAnky, meshDilo, meshRex, meshTower, meshHeart, meshHedge, meshBoulder, meshCraft, meshTile, meshHut, meshDisc;
     Material matGround, matShore, matWater, matCraft, matHome, matRange, matTile, matPalm, matRock, matLocked;
@@ -57,6 +58,11 @@ namespace DinoWorlds {
       matBld[2] = ToyArt.Mat(new Color(0.6f, 0.65f, 0.8f)); matBld[3] = ToyArt.Mat(new Color(0.95f, 0.75f, 0.3f)); matBld[4] = ToyArt.Mat(new Color(0.7f, 0.85f, 0.55f));
     }
 
+    /// <summary>M5 prop: FBX model at its ground-pivot position, else the M4 primitive at its centred position.</summary>
+    Transform Prop(string model, string n, Transform parent, Vector3 modelPos, Mesh mesh, Material mat, Vector3 primPos){
+      if (ArtLib.Prefab(model) != null) return ArtLib.Spawn(model, n, parent, modelPos, 0, null, null);
+      return Part(n, parent, mesh, mat, primPos);
+    }
     Transform Part(string n, Transform parent, Mesh mesh, Material mat, Vector3 pos){
       var go = new GameObject(n); go.transform.SetParent(parent, false); go.transform.position = pos;
       go.AddComponent<MeshFilter>().sharedMesh = mesh; go.AddComponent<MeshRenderer>().sharedMaterial = mat; return go.transform;
@@ -84,7 +90,7 @@ namespace DinoWorlds {
       Part("Ground", homeRoot, ToyArt.Box("G", new Vector3(Home.W + 2, 0.2f, Home.H + 2)), matHome, new Vector3(Home.W * 0.5f, -0.12f, Home.H * 0.5f));
       Part("Water", homeRoot, ToyArt.Box("W", new Vector3(Home.W + 6, 0.15f, 3f)), matWater, new Vector3(Home.W * 0.5f, -0.2f, -1.2f));
       for (int y = 0; y < Home.H; y++) for (int x = 0; x < Home.W; x++)
-        Part("t", homeRoot, meshTile, matTile, new Vector3(x + 0.5f, 0.01f, y + 0.5f));
+        Prop(((x * 7 + y * 13) % 5 == 0) ? "DW_Tile_B" : "DW_Tile", "t", homeRoot, new Vector3(x + 0.5f, -0.03f, y + 0.5f), meshTile, matTile, new Vector3(x + 0.5f, 0.01f, y + 0.5f));
       DrawHomeBuildings();
       cam.SetBounds(Home.W, Home.H); cam.pan = new Vector2(Home.W * 0.5f, Home.H * 0.4f); cam.zoom = 18f; cam.Apply();
       dwAudio.SetBed("home");
@@ -153,13 +159,16 @@ namespace DinoWorlds {
         if (battle.Blocked(new Cell(x, y))) continue;
         bool palm = rng.Next(0, 2) == 0;
         float ph = 1.2f + (float)rng.NextDouble();
-        var st = Part("S" + i, sceneryRoot, palm ? meshPalm : meshRock, palm ? matPalm : matRock, new Vector3(x + 0.5f, palm ? ph * 0.5f : 0.15f, y + 0.5f));
-        if (palm) st.localScale = new Vector3(1f, ph, 1f);
+        string pm = (palm ? "DW_Palm" : "DW_Rock") + (i % 3 == 2 ? "_B" : "");
+        if (ArtLib.Prefab(pm) != null){ var st = ArtLib.Spawn(pm, "S" + i, sceneryRoot, new Vector3(x + 0.5f, 0f, y + 0.5f), 0, null, null);
+          st.rotation = Quaternion.Euler(0, (i * 137) % 360, 0) * st.rotation; /* keep FBX import axis fix */ if (palm) st.localScale = Vector3.one * (ph / 1.47f); }
+        else { var st = Part("S" + i, sceneryRoot, palm ? meshPalm : meshRock, palm ? matPalm : matRock, new Vector3(x + 0.5f, palm ? ph * 0.5f : 0.15f, y + 0.5f));
+          if (palm) st.localScale = new Vector3(1f, ph, 1f); }
       }
       Debug.Log($"[DW] scenery variant={variant} cosmeticOnly=1 isle={selectedIsle}");
     }
     void DrawShore(){ ClearKids(shoreRoot);
-      foreach (var s in battle.isle.Shore) Part("Shore", shoreRoot, meshTile, matShore, new Vector3(s.x + 0.5f, 0.06f, s.y + 0.5f));
+      foreach (var s in battle.isle.Shore) Prop("DW_Tile_Sand", "Shore", shoreRoot, new Vector3(s.x + 0.5f, 0.02f, s.y + 0.5f), meshTile, matShore, new Vector3(s.x + 0.5f, 0.06f, s.y + 0.5f));
     }
     void DrawRangeDiscs(){
       ClearKids(rangeRoot); if (!showRanges || battle == null) return;
@@ -174,7 +183,7 @@ namespace DinoWorlds {
     void DrawCrafts(){
       ClearKids(craftRoot);
       for (int i = 0; i < battle.crafts.Count; i++){
-        var c = battle.crafts[i]; var t = Part("C" + i, craftRoot, meshCraft, matCraft, new Vector3(c.cell.x + 0.5f, 0.2f, c.cell.y + 0.5f));
+        var c = battle.crafts[i]; var t = Prop(i % 2 == 1 ? "DW_Craft_B" : "DW_Craft", "C" + i, craftRoot, new Vector3(c.cell.x + 0.5f, 0f, c.cell.y + 0.5f), meshCraft, matCraft, new Vector3(c.cell.x + 0.5f, 0.2f, c.cell.y + 0.5f));
         if (i == selectedCraft) t.localScale = Vector3.one * 1.15f;
       }
     }
@@ -183,12 +192,15 @@ namespace DinoWorlds {
       var live = new HashSet<int>();
       foreach (var u in battle.units){
         live.Add(u.id);
-        if (!unitT.TryGetValue(u.id, out var t)){ t = ArtLib.Spawn(ArtLib.UnitModel(u.kind), "U" + u.id, unitRoot, Vector3.zero, 0, MeshFor(u.kind), matUnit[(int)u.kind]); unitT[u.id] = t; }
+        if (!unitT.TryGetValue(u.id, out var t)){ t = ArtLib.Spawn(ArtLib.UnitModel(u.kind), "U" + u.id, unitRoot, Vector3.zero, 0, MeshFor(u.kind), matUnit[(int)u.kind]); unitT[u.id] = t;
+          var da = DinoAnim.Attach(t, ArtLib.UnitModel(u.kind), UnitSpec.Of(u.kind).atkCd); if (da != null) unitAnim[u.id] = da; }
         t.gameObject.SetActive(u.Alive);
-        if (u.Alive){ t.position = new Vector3(u.pos.x, 0, u.pos.y); if (u.targetDef >= 0 && u.targetDef < battle.defs.Count){ var d = battle.defs[u.targetDef].pos - u.pos; if (d.sqrMagnitude > 0.01f) t.rotation = Quaternion.LookRotation(new Vector3(d.x, 0, d.y)); } }
+        if (u.Alive){ t.position = new Vector3(u.pos.x, 0, u.pos.y); if (u.targetDef >= 0 && u.targetDef < battle.defs.Count){ var d = battle.defs[u.targetDef].pos - u.pos; if (d.sqrMagnitude > 0.01f) t.rotation = Quaternion.LookRotation(new Vector3(d.x, 0, d.y)); }
+          // Visual only: an attack fired this frame when the Sim reset the unit's cooldown upward.
+          if (unitAnim.TryGetValue(u.id, out var an)){ bool fired = unitCd.TryGetValue(u.id, out var pc) && u.atkCd > pc + 1e-4f; unitCd[u.id] = u.atkCd; if (fired) an.Attack(); an.Step(animDt, t.position); } }
       }
       var dead = new List<int>(); foreach (var kv in unitT) if (!live.Contains(kv.Key)) dead.Add(kv.Key);
-      foreach (var id in dead){ Destroy(unitT[id].gameObject); unitT.Remove(id); }
+      foreach (var id in dead){ Destroy(unitT[id].gameObject); unitT.Remove(id); unitAnim.Remove(id); unitCd.Remove(id); }
     }
     void SyncDefs(){ foreach (var d in battle.defs){ if (!defT.TryGetValue(d.id, out var t)) continue; t.gameObject.SetActive(d.Alive); if (d.Alive) t.localScale = Vector3.one * Mathf.Lerp(0.7f, 1f, d.hp / d.maxHp); } }
 
@@ -213,7 +225,7 @@ namespace DinoWorlds {
       else if (mode == Mode.Map) TickMap();
       else if (mode == Mode.Deploy) TickDeploy(kb);
       else if (mode == Mode.Fight){
-        battle.Tick(dt); SyncUnits(); SyncDefs();
+        battle.Tick(dt); animDt = dt; SyncUnits(); SyncDefs();
         if (dt > 0 && battle.hitEvents.Count > 0 && Time.unscaledTime > sfxTimer){ sfxTimer = Time.unscaledTime + 0.12f; PlayHitSfx(); }
         battle.hitEvents.Clear();
         if (battle.phase == Phase.Win){ progress.GrantWin(selectedIsle); mode = Mode.Result; dwAudio.Win(); Debug.Log($"[DW] result Win loot isle={selectedIsle}"); }
@@ -378,7 +390,7 @@ namespace DinoWorlds {
     }
     public void QARanges(string on){ showRanges = on == "1" || on.ToLower() == "true"; if (mode == Mode.Deploy) DrawRangeDiscs(); Debug.Log($"[DW] qa ranges={(showRanges?1:0)}"); }
     public void QAAudio(){ Debug.Log($"[DW] qa audio {dwAudio.Status()}"); dwAudio.Ui(); dwAudio.Splash(); dwAudio.Peck(); dwAudio.Spit(); dwAudio.Smash(); for (int i = 0; i < 4; i++) dwAudio.Call((Kind)i); Debug.Log($"[DW] qa audio after {dwAudio.Status()}"); }
-    public void QAArt(){ Debug.Log($"[DW] qa art {ArtLib.Status()} mode={mode}"); }
+    public void QAArt(){ Debug.Log($"[DW] qa art {ArtLib.Status()} anim={DinoAnim.active} attacks={DinoAnim.attacks} walkFrames={DinoAnim.walkers} evalT={DinoAnim.evalT:F1} mode={mode}"); }
     public void QAOpt(string a){ var p = a.Split(','); var v = float.Parse(p[1], System.Globalization.CultureInfo.InvariantCulture);
       if (p[0] == "music") dwAudio.SetMusic(v); else if (p[0] == "sfx") dwAudio.SetSfx(v); else if (p[0] == "mute") dwAudio.SetMute(v > 0.5f); else if (p[0] == "ui") SetUiScale(v);
       Debug.Log($"[DW] qa opt {a} ui={uiScale:F2} audio={dwAudio.Status()} sync={DwPersist.Count()}"); }
@@ -400,7 +412,7 @@ namespace DinoWorlds {
 
     /// <summary>M4 UI: original nine-slice skins on IMGUI, with readable text scaled by screen height and the UI-scale option.</summary>
     void EnsureStyles(float s){
-      if (sBtn != null && Mathf.Approximately(styledAt, s)) return; styledAt = s;
+      if (sBtn != null && Mathf.Approximately(styledAt, s)) return; styledAt = s; padCache.Clear();
       var cream = new Color(1f, 0.97f, 0.88f); var ink = new Color(0.12f, 0.16f, 0.2f);
       sLabel = new GUIStyle(GUI.skin.label){ fontSize = Mathf.RoundToInt(16 * s), wordWrap = true };
       sLabel.normal.textColor = ink;
@@ -424,38 +436,79 @@ namespace DinoWorlds {
     bool Btn(string t, params GUILayoutOption[] o){ return GUILayout.Button(t, sBtn ?? GUI.skin.button, o); }
     bool Tog(bool v, string t, params GUILayoutOption[] o){ return GUILayout.Toggle(v, t, sTog ?? GUI.skin.button, o); }
 
+    // M5 icons: original DW_Icon_* textures drawn at the left of a control; text stays readable beside it.
+    static string IconOf(Kind k){ return "DW_Icon_" + k; }
+    static string IconOf(BldKind k){ return "DW_Icon_" + k; }
+    static string IconOf(DefKind k){ return "DW_Icon_" + k; }
+    float iconPx;
+    readonly System.Collections.Generic.Dictionary<string, GUIStyle> padCache = new System.Collections.Generic.Dictionary<string, GUIStyle>();
+    GUIStyle Padded(GUIStyle b, string icon){ var t = ArtLib.Ui(icon); if (t == null) return b; string key = (b == sTog ? "t" : "b") + iconPx;
+      if (padCache.TryGetValue(key, out var c)) return c; var st = new GUIStyle(b); padCache[key] = st; st.padding = new RectOffset(b.padding.left + Mathf.RoundToInt(iconPx + 4), b.padding.right, b.padding.top, b.padding.bottom); return st; }
+    void DrawIconInLast(string icon){
+      if (Event.current.type != EventType.Repaint) return; var t = ArtLib.Ui(icon); if (t == null) return;
+      var r = GUILayoutUtility.GetLastRect(); float z = Mathf.Min(iconPx, r.height - 6); var box = new Rect(r.x + 8, r.y + (r.height - z) * 0.5f, z, z);
+      // Cream disc behind the icon so teal/dark glyphs (Upgrade, Range, Pause, Back) read on the teal button skin.
+      if (icon != "DW_Icon_Play") GUI.DrawTexture(box, Disc(), ScaleMode.ScaleToFit, true, 0, new Color(1f, 0.97f, 0.88f, 0.95f), 0, 0); // Play glyph is cream: draw it straight on teal
+      var inner = new Rect(box.x + z * 0.08f, box.y + z * 0.08f, z * 0.84f, z * 0.84f);
+      // Species portraits have wide transparent margins: sample their centre so they read at button size.
+      if (icon.EndsWith("saurus") || icon.EndsWith("raptor")) GUI.DrawTextureWithTexCoords(inner, t, new Rect(0.2f, 0.2f, 0.6f, 0.6f));
+      else GUI.DrawTexture(inner, t, ScaleMode.ScaleToFit);
+    }
+    static Texture2D disc;
+    static Texture2D Disc(){
+      if (disc != null) return disc; const int n = 64; disc = new Texture2D(n, n, TextureFormat.RGBA32, false){ wrapMode = TextureWrapMode.Clamp };
+      var px = new Color32[n * n]; float c = (n - 1) * 0.5f;
+      for (int y = 0; y < n; y++) for (int x = 0; x < n; x++){ float d = Mathf.Sqrt((x - c) * (x - c) + (y - c) * (y - c)); byte a = (byte)(Mathf.Clamp01(c - d + 0.5f) * 255); px[y * n + x] = new Color32(255, 255, 255, a); }
+      disc.SetPixels32(px); disc.Apply(); return disc;
+    }
+    bool IBtn(string icon, string t, params GUILayoutOption[] o){ bool b = GUILayout.Button(t, Padded(sBtn ?? GUI.skin.button, icon), o); DrawIconInLast(icon); return b; }
+    bool ITog(bool v, string icon, string t, params GUILayoutOption[] o){ bool b = GUILayout.Toggle(v, t, Padded(sTog ?? GUI.skin.button, icon), o); DrawIconInLast(icon); return b; }
+    void Icon(string icon){ var t = ArtLib.Ui(icon); if (t == null) return; var r = GUILayoutUtility.GetRect(iconPx, iconPx, GUILayout.Width(iconPx), GUILayout.Height(iconPx)); if (Event.current.type == EventType.Repaint) GUI.DrawTexture(r, t, ScaleMode.ScaleToFit); }
+    void ILabel(string icon, string t){ GUILayout.BeginHorizontal(); Icon(icon); GUILayout.Label(t); GUILayout.EndHorizontal(); }
+
+    /// <summary>M5: scouting row on the deploy screen, one defense icon per kind with its count on this isle.</summary>
+    void DefenseBadges(float s){
+      GUILayout.BeginHorizontal(); GUILayout.Label("Defenses:", GUILayout.ExpandWidth(false));
+      for (int d = 1; d < 5; d++){ var k = (DefKind)d; int n = 0; foreach (var x in battle.isle.Defs) if (x.k == k) n++; if (n == 0) continue;
+        Icon(IconOf(k)); GUILayout.Label($"x{n}", GUILayout.ExpandWidth(false)); GUILayout.Space(10 * s); }
+      GUILayout.FlexibleSpace(); GUILayout.EndHorizontal();
+    }
+
     void OnGUI(){
       float s = Mathf.Max(1f, Screen.height / 900f) * uiScale; GUI.skin.label.fontSize = Mathf.RoundToInt(16 * s); GUI.skin.button.fontSize = Mathf.RoundToInt(15 * s);
       EnsureStyles(s);
       GUI.skin.label.normal.textColor = sLabel.normal.textColor; GUI.skin.label.wordWrap = true;
-      float bh = 40 * s;
+      float bh = 40 * s; iconPx = 26 * s;
       GUILayout.BeginArea(new Rect(10 * s, 10 * s, Mathf.Min(480 * s, Screen.width - 20 * s), Screen.height - 20 * s));
       // Scrolls when large text or a short screen would push buttons off-screen (keeps every control reachable).
       GUI.skin.verticalScrollbar.fixedWidth = 16 * s; GUI.skin.verticalScrollbarThumb.fixedWidth = 16 * s;
       uiScroll = GUILayout.BeginScrollView(uiScroll, false, false, GUIStyle.none, GUI.skin.verticalScrollbar, GUIStyle.none);
       GUILayout.BeginVertical(sPanel);
-      GUILayout.Label($"Dino Worlds  ·  Amber {progress.amber}/{progress.AmberCap}  ·  Shards {progress.shards}/{progress.ShardCap}");
+      GUILayout.Label("Dino Worlds");
+      GUILayout.BeginHorizontal(); Icon("DW_Icon_Amber"); GUILayout.Label($"Amber {progress.amber}/{progress.AmberCap}", GUILayout.ExpandWidth(false)); GUILayout.Space(12 * s);
+      Icon("DW_Icon_BoneShards"); GUILayout.Label($"Shards {progress.shards}/{progress.ShardCap}", GUILayout.ExpandWidth(false)); GUILayout.FlexibleSpace(); GUILayout.EndHorizontal();
       if (toastT > 0) GUILayout.Label(toast);
       if (mode == Mode.Home){
         GUILayout.Label("Home Roost (never attacked) — click empty cell to build");
         GUILayout.BeginHorizontal();
-        if (Tog(buildKind == BldKind.Hatchery, $"Hatchery ({progress.BuildCost(BldKind.Hatchery)}A)", GUILayout.Height(bh))) buildKind = BldKind.Hatchery;
-        if (Tog(buildKind == BldKind.Workshop, $"Workshop ({progress.BuildCost(BldKind.Workshop)}A)", GUILayout.Height(bh))) buildKind = BldKind.Workshop;
+        if (ITog(buildKind == BldKind.Hatchery, IconOf(BldKind.Hatchery), $"Hatchery ({progress.BuildCost(BldKind.Hatchery)}A)", GUILayout.Height(bh))) buildKind = BldKind.Hatchery;
+        if (ITog(buildKind == BldKind.Workshop, IconOf(BldKind.Workshop), $"Workshop ({progress.BuildCost(BldKind.Workshop)}A)", GUILayout.Height(bh))) buildKind = BldKind.Workshop;
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
-        if (Tog(buildKind == BldKind.AmberPit, $"Amber Pit ({progress.BuildCost(BldKind.AmberPit)}A)", GUILayout.Height(bh))) buildKind = BldKind.AmberPit;
-        if (Tog(buildKind == BldKind.Nest, $"Nest ({progress.BuildCost(BldKind.Nest)}A)", GUILayout.Height(bh))) buildKind = BldKind.Nest;
+        if (ITog(buildKind == BldKind.AmberPit, IconOf(BldKind.AmberPit), $"Amber Pit ({progress.BuildCost(BldKind.AmberPit)}A)", GUILayout.Height(bh))) buildKind = BldKind.AmberPit;
+        if (ITog(buildKind == BldKind.Nest, IconOf(BldKind.Nest), $"Nest ({progress.BuildCost(BldKind.Nest)}A)", GUILayout.Height(bh))) buildKind = BldKind.Nest;
         GUILayout.EndHorizontal();
-        GUILayout.Label($"Hatchery Lv {progress.hatchery}/{Progress.MaxBldLvl}  Workshop Lv {progress.workshop}/{Progress.MaxBldLvl}  Storage Lv {progress.storage}/{Progress.MaxBldLvl}  Pop {progress.PopCap}");
-        int hc = progress.HatchUpgradeCost(); if (hc < 0) GUILayout.Label("Hatchery MAX"); else if (Btn($"Upgrade Hatchery ({hc}A)", GUILayout.Height(bh))) if (!progress.TryUpgradeHatchery()) Toast("Can't"); else { DrawHomeBuildings(); dwAudio.Ui(); Toast("Hatchery upgraded"); }
-        int wc = progress.WorkshopUpgradeCost(); if (wc < 0) GUILayout.Label("Workshop MAX"); else if (Btn($"Upgrade Workshop ({wc}A)", GUILayout.Height(bh))) if (!progress.TryUpgradeWorkshop()) Toast("Can't"); else { dwAudio.Ui(); Toast("Workshop upgraded"); }
-        int sc = progress.StorageUpgradeCost(); if (sc < 0) GUILayout.Label("Storage MAX"); else if (Btn($"Upgrade Storage ({sc}A)", GUILayout.Height(bh))) if (!progress.TryUpgradeStorage()) Toast("Can't"); else { dwAudio.Ui(); Toast("Storage upgraded"); }
+        GUILayout.Label($"Hatchery Lv {progress.hatchery}/{Progress.MaxBldLvl}  Workshop Lv {progress.workshop}/{Progress.MaxBldLvl}  Storage Lv {progress.storage}/{Progress.MaxBldLvl}");
+        ILabel("DW_Icon_Population", $"Pop {progress.PopCap}");
+        int hc = progress.HatchUpgradeCost(); if (hc < 0) GUILayout.Label("Hatchery MAX"); else if (IBtn("DW_Icon_Hatchery", $"Upgrade Hatchery ({hc}A)", GUILayout.Height(bh))) if (!progress.TryUpgradeHatchery()) Toast("Can't"); else { DrawHomeBuildings(); dwAudio.Ui(); Toast("Hatchery upgraded"); }
+        int wc = progress.WorkshopUpgradeCost(); if (wc < 0) GUILayout.Label("Workshop MAX"); else if (IBtn("DW_Icon_Workshop", $"Upgrade Workshop ({wc}A)", GUILayout.Height(bh))) if (!progress.TryUpgradeWorkshop()) Toast("Can't"); else { dwAudio.Ui(); Toast("Workshop upgraded"); }
+        int sc = progress.StorageUpgradeCost(); if (sc < 0) GUILayout.Label("Storage MAX"); else if (IBtn("DW_Icon_Upgrade", $"Upgrade Storage ({sc}A)", GUILayout.Height(bh))) if (!progress.TryUpgradeStorage()) Toast("Can't"); else { dwAudio.Ui(); Toast("Storage upgraded"); }
         GUILayout.Label("Bone Shard unit upgrades (cap 3):");
-        for (int i = 0; i < 4; i++){ var k = (Kind)i; if (!progress.Unlocked(k)){ GUILayout.Label($"{UnitSpec.Of(k).name}: locked"); continue; }
+        for (int i = 0; i < 4; i++){ var k = (Kind)i; if (!progress.Unlocked(k)){ ILabel(IconOf(k), $"{UnitSpec.Of(k).name}: locked"); continue; }
           int uc = progress.UnitUpgradeCost(k);
-          if (uc < 0) GUILayout.Label($"{UnitSpec.Of(k).name} Lv {progress.unitLvl[i]} MAX");
-          else if (Btn($"{UnitSpec.Of(k).name} Lv {progress.unitLvl[i]} ({uc}S)", GUILayout.Height(bh))) if (!progress.TryUpgradeUnit(k)) Toast("Can't"); else { dwAudio.Ui(); Toast("Upgraded " + k); } }
-        if (Btn("Raid map", GUILayout.Height(bh))) EnterMap();
+          if (uc < 0) ILabel(IconOf(k), $"{UnitSpec.Of(k).name} Lv {progress.unitLvl[i]} MAX");
+          else if (IBtn(IconOf(k), $"{UnitSpec.Of(k).name} Lv {progress.unitLvl[i]} ({uc}S)", GUILayout.Height(bh))) if (!progress.TryUpgradeUnit(k)) Toast("Can't"); else { dwAudio.Ui(); Toast("Upgraded " + k); } }
+        if (IBtn("DW_Icon_Map", "Raid map", GUILayout.Height(bh))) EnterMap();
         if (Btn("Options / Reset", GUILayout.Height(bh))) EnterOptions();
       } else if (mode == Mode.Map){
         GUILayout.Label("Choose an isle — Shore → Ridge → Caldera");
@@ -465,27 +518,30 @@ namespace DinoWorlds {
           if (Btn($"{i+1}. {isle.name} [{isle.band}] {(progress.isleClear[i] ? "CLEARED" : open ? "OPEN" : "LOCKED")}", GUILayout.Height(bh))) EnterRaid(i);
           GUI.enabled = true;
         }
-        if (Btn("Back to roost", GUILayout.Height(bh))) EnterHome();
+        if (IBtn("DW_Icon_Back", "Back to roost", GUILayout.Height(bh))) EnterHome();
       } else if (mode == Mode.Deploy){
-        GUILayout.Label($"{battle.isle.name} [{battle.isle.band}] — Deploy  Pop {battle.TotalPop()}/{battle.popCap}");
+        GUILayout.Label($"{battle.isle.name} [{battle.isle.band}] — Deploy");
+        ILabel("DW_Icon_Population", $"Pop {battle.TotalPop()}/{battle.popCap}");
+        DefenseBadges(s);
         GUILayout.Label($"Priority: {UnitSpec.Of(trayKind).blurb}");
         GUILayout.BeginHorizontal();
         for (int i = 0; i < 4; i++){ var k = (Kind)i; if (!progress.Unlocked(k)) continue;
-          if (Tog(trayKind == k, $"{i + 1} {UnitSpec.Of(k).name}", GUILayout.Height(bh))) trayKind = k; }
+          if (ITog(trayKind == k, IconOf(k), $"{i + 1} {UnitSpec.Of(k).name}", GUILayout.Height(bh))) trayKind = k; }
         GUILayout.EndHorizontal();
-        if (Btn(showRanges ? "Hide range discs" : "Show range discs", GUILayout.Height(bh))){ showRanges = !showRanges; DrawRangeDiscs(); dwAudio.Ui(); }
-        if (Btn("Start raid", GUILayout.Height(bh))) TryStart();
-        if (Btn("Back to map", GUILayout.Height(bh))) EnterMap();
+        if (IBtn("DW_Icon_Range", showRanges ? "Hide range discs" : "Show range discs", GUILayout.Height(bh))){ showRanges = !showRanges; DrawRangeDiscs(); dwAudio.Ui(); }
+        if (IBtn("DW_Icon_Play", "Start raid", GUILayout.Height(bh))) TryStart();
+        if (IBtn("DW_Icon_Back", "Back to map", GUILayout.Height(bh))) EnterMap();
       } else if (mode == Mode.Fight){
         GUILayout.Label("Autonomous fight — no mid-battle orders");
-        foreach (var d in battle.defs) if (d.kind == DefKind.RoostHeart) GUILayout.Label($"Roost Heart {Mathf.CeilToInt(d.hp)}/{Mathf.CeilToInt(d.maxHp)}");
+        foreach (var d in battle.defs) if (d.kind == DefKind.RoostHeart) ILabel(IconOf(DefKind.RoostHeart), $"Roost Heart {Mathf.CeilToInt(d.hp)}/{Mathf.CeilToInt(d.maxHp)}");
         int alive = 0; foreach (var u in battle.units) if (u.Alive) alive++; GUILayout.Label($"Alive {alive}  t={battle.fightClock:F0}s");
         if (paused) GUILayout.Label("PAUSED");
+        if (IBtn(paused ? "DW_Icon_Play" : "DW_Icon_Pause", paused ? "Resume (Esc)" : "Pause (Esc)", GUILayout.Height(bh))){ paused = !paused; dwAudio.Ui(); }
       } else if (mode == Mode.Result){
         GUILayout.Label(battle.lastResult);
         GUILayout.Label(battle.phase == Phase.Win ? "Isle cleared! Loot saved." : "Wiped out — consolation shards. Raid stays free — retry anytime.");
         if (battle.phase == Phase.Lose && Btn("Retry deploy (free)", GUILayout.Height(bh))) DoRetry();
-        if (Btn("Return to roost", GUILayout.Height(bh))) EnterHome();
+        if (IBtn("DW_Icon_Back", "Return to roost", GUILayout.Height(bh))) EnterHome();
       } else if (mode == Mode.Options){
         GUILayout.Label("Options — save is local to this browser");
         GUILayout.Label($"Audio {dwAudio.Status()}");
@@ -503,7 +559,7 @@ namespace DinoWorlds {
         GUILayout.Label("Reset progress — type RESET then confirm");
         resetDraft = GUILayout.TextField(resetDraft ?? "", GUILayout.Height(bh));
         if (Btn("Confirm reset", GUILayout.Height(bh))) ApplyTypedReset(resetDraft);
-        if (Btn("Back", GUILayout.Height(bh))) EnterHome();
+        if (IBtn("DW_Icon_Back", "Back", GUILayout.Height(bh))) EnterHome();
       }
       GUILayout.EndVertical();
       GUILayout.EndScrollView();
